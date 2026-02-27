@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/navbar";
+import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,7 +24,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
         {/* ── Fixed deep-space gradient background ── */}
         <div className="fixed inset-0 -z-20 bg-gradient-to-br from-[#0a0a1a] via-[#0d1b3e] to-[#0a0a1a]" />
 
@@ -35,7 +36,13 @@ export default function RootLayout({
         </div>
 
         <Navbar />
-        {children}
+
+        {/* Flex-grow so footer always stays at the bottom */}
+        <div className="flex-1">
+          {children}
+        </div>
+
+        <SiteFooter />
       </body>
     </html>
   );
